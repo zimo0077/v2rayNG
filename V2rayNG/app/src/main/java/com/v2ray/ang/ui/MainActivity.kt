@@ -32,7 +32,6 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    // ShadeLine three-node server selection
     private var selectedNodeIndex = 0
     private data class ServerNode(val name: String, val host: String, val port: Int, val id: String)
     private val SERVER_NODES = listOf(
@@ -44,21 +43,14 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentViewWithToolbar(binding.root, showHomeAsUp = false, title = getString(R.string.app_name))
-
         setupServerNodes()
 
         binding.btnConnect.setOnClickListener {
-            val node = SERVER_NODES[selectedNodeIndex]
             if (SettingsManager.isVpnMode()) {
                 val intent = VpnService.prepare(this)
-                if (intent == null) {
-                    startV2Ray()
-                } else {
-                    requestVpnPermission.launch(intent)
-                }
-            } else {
-                startV2Ray()
-            }
+                if (intent == null) startV2Ray()
+                else requestVpnPermission.launch(intent)
+            } else { startV2Ray() }
         }
 
         binding.btnStop.setOnClickListener {
@@ -76,13 +68,11 @@ class MainActivity : BaseActivity() {
                 val url = editText.text.toString().trim()
                 if (url.isNotEmpty()) {
                     val subId = MmkvManager.createSubscription("Subscription", url, "", false)
-                    if (subId != null) {
-                        lifecycleScope.launch(Dispatchers.IO) {
-                            val result = AngConfigManager.updateSubscription(subId)
-                            launch(Dispatchers.Main) {
-                                if (result > 0) toast("Imported $result servers")
-                                else toast("Import failed")
-                            }
+                    if (subId != null) lifecycleScope.launch(Dispatchers.IO) {
+                        val result = AngConfigManager.updateSubscription(subId)
+                        launch(Dispatchers.Main) {
+                            if (result > 0) toast("Imported $result servers")
+                            else toast("Import failed")
                         }
                     }
                 }
@@ -91,9 +81,7 @@ class MainActivity : BaseActivity() {
             input.show()
         }
 
-        binding.btnPayment.setOnClickListener {
-            Utils.openUri(this, "https://mindsparklearn.com/pricing")
-        }
+        binding.btnPayment.setOnClickListener { Utils.openUri(this, "https://mindsparklearn.com/pricing") }
 
         binding.btnSpeedTest.setOnClickListener {
             val node = SERVER_NODES[selectedNodeIndex]
@@ -106,12 +94,10 @@ class MainActivity : BaseActivity() {
                     (System.currentTimeMillis() - start).toInt()
                 } catch (e: Exception) { -1 }
                 withContext(Dispatchers.Main) {
-                    val text = if (ping < 0) "延迟: 超时" else "延迟: ${ping}ms"
-                    updatePingForNode(selectedNodeIndex, text)
+                    updatePingForNode(selectedNodeIndex, if (ping < 0) "延迟: 超时" else "延迟: ${ping}ms")
                 }
             }
         }
-
         updateConnectionStatus(false)
     }
 
@@ -136,53 +122,25 @@ class MainActivity : BaseActivity() {
     }
 
     private fun updatePingForNode(index: Int, text: String) {
-        when (index) {
-            0 -> binding.tvPingUk.text = text
-            1 -> binding.tvPingUs1.text = text
-            2 -> binding.tvPingUs2.text = text
-        }
+        when (index) { 0 -> binding.tvPingUk.text = text; 1 -> binding.tvPingUs1.text = text; 2 -> binding.tvPingUs2.text = text }
     }
 
-    private fun startV2Ray() {
-        V2RayServiceManager.startVService(this)
-        updateConnectionStatus(true)
-    }
-
+    private fun startV2Ray() { V2RayServiceManager.startVService(this); updateConnectionStatus(true) }
     private fun updateConnectionStatus(isRunning: Boolean) {
-        binding.btnConnect.isEnabled = !isRunning
-        binding.btnStop.isEnabled = isRunning
-        binding.tvStatus.text = if (isRunning) "🟢 已连接" else "🔴 已断开"
+        binding.btnConnect.isEnabled = !isRunning; binding.btnStop.isEnabled = isRunning
+        binding.tvStatus.text = if (isRunning) "\uD83D\uDFE2 已连接" else "\uD83D\uDD34 已断开"
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_account_info -> {
-                toast("账号: ${LoginActivity.getAccount(this)}")
-                true
-            }
-            R.id.action_version -> {
-                toast("ShadeLine v2.0")
-                true
-            }
-            R.id.action_login -> {
-                if (LoginActivity.isLoggedIn(this)) {
-                    LoginActivity.logout(this)
-                    toast("已退出登录")
-                } else {
-                    startActivity(Intent(this, LoginActivity::class.java))
-                }
-                true
-            }
-            R.id.action_subscription_pay -> {
-                Utils.openUri(this, "https://mindsparklearn.com/pricing")
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
+    override fun onCreateOptionsMenu(menu: Menu): Boolean { menuInflater.inflate(R.menu.menu_main, menu); return true }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.action_account_info -> { toast("账号: ${LoginActivity.getAccount(this)}"); true }
+        R.id.action_version -> { toast("ShadeLine v2.0"); true }
+        R.id.action_login -> {
+            if (LoginActivity.isLoggedIn(this)) { LoginActivity.logout(this); toast("已退出登录") }
+            else { startActivity(Intent(this, LoginActivity::class.java)) }
+            true
         }
+        R.id.action_subscription_pay -> { Utils.openUri(this, "https://mindsparklearn.com/pricing"); true }
+        else -> super.onOptionsItemSelected(item)
     }
 }
