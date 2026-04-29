@@ -85,4 +85,11 @@
         <item name="android:navigationBarColor">#1D1D1F</item>
     </style>
 
+
+    <!-- ShadeLine Splash Theme -->
+    <style name="Theme.ShadeLine.Splash" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@color/md_theme_primary</item>
+        <item name="android:statusBarColor">@color/md_theme_primary</item>
+        <item name="android:navigationBarColor">@color/md_theme_primary</item>
+    </style>
 </resources>

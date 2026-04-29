@@ -292,6 +292,12 @@
                 android:resource="@xml/cache_paths" />
         </provider>
 
-    </application>
+    
+        <activity
+            android:name="com.v2ray.ang.ui.LoginActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ShadeLine.Splash"
+            android:screenOrientation="portrait" />
+</application>
 
 </manifest>
