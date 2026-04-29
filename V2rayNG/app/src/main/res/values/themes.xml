@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Common base theme: put all shared items here so day/night can reuse -->
@@ -76,6 +77,12 @@
 
     <style name="BrandedSwitch" parent="AppThemeDayNight">
         <item name="colorPrimary">@color/color_fab_active</item>
+    </style>
+
+    <style name="Theme.ShadeLine.Splash" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/ic_launcher_background</item>
+        <item name="android:statusBarColor">#1D1D1F</item>
+        <item name="android:navigationBarColor">#1D1D1F</item>
     </style>
 
 </resources>
