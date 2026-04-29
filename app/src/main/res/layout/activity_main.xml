@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1D1D1F"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Top Bar -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginBottom="8dp">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="ShadeLine"
+            android:textColor="#D4A853"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/btn_profile"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_more_vert_24dp"
+            android:tint="#D4A853"
+            android:contentDescription="Profile Menu" />
+    </RelativeLayout>
+
+    <!-- Connection Status -->
+    <TextView
+        android:id="@+id/tv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/connection_not_connected"
+        android:textColor="#FF4444"
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Server Nodes -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="选择节点"
+        android:textColor="#9C9C9C"
+        android:textSize="14sp"
+        android:layout_marginBottom="8dp" />
+
+    <LinearLayout
+        android:id="@+id/layout_server_uk"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:orientation="horizontal"
+        android:background="@drawable/server_card_bg"
+        android:gravity="center_vertical"
+        android:padding="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_marginBottom="8dp">
+
+        <RadioButton
+            android:id="@+id/rb_server_uk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="#D4A853"
+            android:layout_marginEnd="12dp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🇬🇧 英国节点"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_ping_uk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="延迟: -- ms"
+                android:textColor="#9C9C9C"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_status_uk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="●"
+            android:textColor="#9C9C9C"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_server_us1"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:orientation="horizontal"
+        android:background="@drawable/server_card_bg"
+        android:gravity="center_vertical"
+        android:padding="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_marginBottom="8dp">
+
+        <RadioButton
+            android:id="@+id/rb_server_us1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="#D4A853"
+            android:layout_marginEnd="12dp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🇺🇸 美国一号节点"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_ping_us1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="延迟: -- ms"
+                android:textColor="#9C9C9C"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_status_us1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="●"
+            android:textColor="#9C9C9C"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_server_us2"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:orientation="horizontal"
+        android:background="@drawable/server_card_bg"
+        android:gravity="center_vertical"
+        android:padding="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_marginBottom="24dp">
+
+        <RadioButton
+            android:id="@+id/rb_server_us2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="#D4A853"
+            android:layout_marginEnd="12dp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🇺🇸 美国二号节点"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_ping_us2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="延迟: -- ms"
+                android:textColor="#9C9C9C"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_status_us2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="●"
+            android:textColor="#9C9C9C"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <!-- Speed Test Button -->
+    <Button
+        android:id="@+id/btn_speed_test"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="🔄 测速"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#3A3A3C"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Connect/Disconnect Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="12dp">
+
+        <Button
+            android:id="@+id/btn_connect"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="🔗 连接"
+            android:textColor="#1D1D1F"
+            android:backgroundTint="#D4A853"
+            android:textSize="18sp"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:id="@+id/btn_stop"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="⛔ 断开"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#BA1A1A"
+            android:textSize="18sp"
+            android:enabled="false" />
+    </LinearLayout>
+
+    <!-- Subscription URL Input -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:background="@drawable/edit_text_bg"
+        android:padding="4dp">
+
+        <EditText
+            android:id="@+id/et_subscription"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:hint="输入订阅链接..."
+            android:textColorHint="#9C9C9C"
+            android:textColor="#FFFFFF"
+            android:background="@android:color/transparent"
+            android:padding="8dp"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/btn_subscription"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="导入"
+            android:textColor="#1D1D1F"
+            android:backgroundTint="#D4A853"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+</LinearLayout>
