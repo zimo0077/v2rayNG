@@ -21,6 +21,14 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class MainActivity : BaseActivity() {
+    private var selectedNodeIndex = 0
+    private data class ServerNode(val name: String, val host: String, val port: Int, val id: String)
+    private val SERVER_NODES = listOf(
+        ServerNode("英国节点", "77.68.49.98", 443, ""),
+        ServerNode("美国一号节点", "23.95.226.190", 443, ""),
+        ServerNode("美国二号节点", "23.94.236.233", 19105, "84f6ceb1-4c97-49ae-b1f7-661dd5147e78")
+    )
+
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
   
@@ -1844,3 +1852,25 @@ class MainActivity : BaseActivity() {
     }
 
 }}
+
+    // ShadeLine three-node server selection
+    private fun setupServerNodes() {
+        binding.layoutServerUk.setOnClickListener { selectNode(0) }
+        binding.rbServerUk.setOnClickListener { selectNode(0) }
+        binding.layoutServerUs1.setOnClickListener { selectNode(1) }
+        binding.rbServerUs1.setOnClickListener { selectNode(1) }
+        binding.layoutServerUs2.setOnClickListener { selectNode(2) }
+        binding.rbServerUs2.setOnClickListener { selectNode(2) }
+        selectNode(0)
+    }
+    private fun selectNode(index: Int) {
+        selectedNodeIndex = index
+        binding.rbServerUk.isChecked = index == 0
+        binding.rbServerUs1.isChecked = index == 1
+        binding.rbServerUs2.isChecked = index == 2
+        listOf(binding.layoutServerUk, binding.layoutServerUs1, binding.layoutServerUs2).forEachIndexed { i, v ->
+            v.alpha = if (i == index) 1.0f else 0.6f
+        }
+    }
+
+}
